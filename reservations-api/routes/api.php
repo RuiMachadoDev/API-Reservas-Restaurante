@@ -3,6 +3,12 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\TableController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ReviewController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +20,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Rotas protegidas por autenticação
+Route::middleware('auth:sanctum')->group(function () {
+    // Restaurantes
+    Route::apiResource('restaurants', RestaurantController::class);
+
+    // Mesas
+    Route::apiResource('tables', TableController::class);
+
+    // Reservas
+    Route::apiResource('reservations', ReservationController::class);
+
+    // Cardápio
+    Route::apiResource('menus', MenuController::class);
+
+    // Avaliações
+    Route::apiResource('reviews', ReviewController::class);
 });
