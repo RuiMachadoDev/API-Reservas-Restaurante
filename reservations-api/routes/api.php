@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AuthController;
+
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\ReservationController;
@@ -19,6 +21,10 @@ use App\Http\Controllers\ReviewController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+// Rotas públicas
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 // Rotas protegidas por autenticação
 Route::middleware('auth:sanctum')->group(function () {
