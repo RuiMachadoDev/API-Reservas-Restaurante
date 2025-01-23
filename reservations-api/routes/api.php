@@ -42,4 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Avaliações
     Route::apiResource('reviews', ReviewController::class);
+
+    // Reports
+    Route::get('/restaurants/{id}/report', [RestaurantController::class, 'report']);
 });

@@ -85,4 +85,21 @@ class RestaurantController extends Controller
 
         return response()->json(['message' => 'Restaurant deleted']);
     }
+
+    public function report($id)
+    {
+        $restaurant = Restaurant::find($id);
+
+        if (!$restaurant) {
+            return response()->json(['message' => 'Restaurant not found'], 404);
+        }
+
+        $reservations = $restaurant->reservations()->count();
+        $averageRating = $restaurant->reviews()->avg('rating');
+
+        return response()->json([
+            'total_reservations' => $reservations,
+            'average_rating' => $averageRating,
+        ]);
+    }
 }
