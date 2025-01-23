@@ -10,7 +10,7 @@ class RestaurantController extends Controller
     // Listar todos os restaurantes
     public function index()
     {
-        return Restaurant::all();
+        return Restaurant::paginate(10);
     }
 
     // Criar um novo restaurante
