@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Reservation;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use App\Notifications\ReservationConfirmed;
 
 class ReservationController extends Controller
 {
@@ -44,6 +45,9 @@ class ReservationController extends Controller
             'number_of_people' => $validated['number_of_people'],
             'reservation_time' => $validated['reservation_time'],
         ]);
+
+        // Enviar notificação de confirmação ao utilizador
+        $reservation->user->notify(new ReservationConfirmed($reservation));
 
         return response()->json($reservation, 201);
     }
